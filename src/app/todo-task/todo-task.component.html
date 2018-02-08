@@ -4,7 +4,7 @@ Lista
 <p [ngStyle]="{color: getColor()}">Zadania do wykonania: {{tasksList.length}} </p>
   <ul>
   <li *ngFor="let task of tasksList; let odd = odd" [ngClass]="{'odd-li': odd==true, 'last-li': tasksList.length==1}">
-    {{task}}
+    {{task.name}}
     <button type="button" class="btn btn-danger" (click)="remove(task)">USUŃ</button>
     <button type="button" class="btn btn-success"(click)="done(task)">ZROBIONE</button>
   </li>
