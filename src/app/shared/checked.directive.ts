@@ -1,5 +1,4 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
-import { Renderer2 } from '@angular/core/src/render/api';
+import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appChecked]'
@@ -7,9 +6,13 @@ import { Renderer2 } from '@angular/core/src/render/api';
 export class CheckedDirective implements OnInit {
 
   ngOnInit(): void {
-    let li = this.el.nativeElement;
+    const li = this.el.nativeElement;
+    this.renderer.setStyle(li, 'list-style-image', 'url(/assets/favicon.png)');
+    this.renderer.setStyle(li, 'background', 'aquamarine');
+
     }
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
 }
+

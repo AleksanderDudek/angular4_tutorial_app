@@ -7,6 +7,9 @@ import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { TodoTasdonekComponent } from './todo-tasdonek/todo-tasdonek.component';
 import { TasksService } from './services/tasks.service';
 import { CheckedDirective } from './shared/checked.directive';
+import { DateDirective } from './shared/date.directive';
+import { TransformTaskPipe } from './shared/transform-task.pipe';
+import { SortNamePipe } from './shared/sort-name.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { CheckedDirective } from './shared/checked.directive';
     AddTaskComponent,
     TodoTaskComponent,
     TodoTasdonekComponent,
-    CheckedDirective
+    CheckedDirective,
+    DateDirective,
+    TransformTaskPipe,
+    SortNamePipe
   ],
   imports: [
     BrowserModule,

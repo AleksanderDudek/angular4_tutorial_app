@@ -29,6 +29,7 @@ tasksList: Array<Task> = [];
   }
 
   done(task: Task) {
+    task.end = new Date();
     this.tasksTaskService.done(task);
 
   }
