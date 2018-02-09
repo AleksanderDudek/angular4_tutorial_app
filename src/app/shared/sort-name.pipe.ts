@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Task } from '../models/task';
 
 @Pipe({
-  name: 'sortName'
+  name: 'sortName',
+  pure: true
 })
 export class SortNamePipe implements PipeTransform {
 

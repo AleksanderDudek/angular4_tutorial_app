@@ -17,7 +17,7 @@ tasksList: Array<Task> = [];
   constructor(private tasksTaskService: TasksService) {
     this.tasksTaskService.getTasksListObs().subscribe(
       (tasks: Array<Task>) => {
-      this.tasksList = tasks;
+      this.tasksList = tasks.filter(t => t.isDone === false);
     });
   }
 
@@ -29,7 +29,7 @@ tasksList: Array<Task> = [];
   }
 
   done(task: Task) {
-    task.end = new Date();
+    task.end = new Date().toLocaleString();
     this.tasksTaskService.done(task);
 
   }

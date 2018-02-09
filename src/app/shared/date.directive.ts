@@ -6,7 +6,7 @@ import { Directive, HostListener, Input, Renderer2, ElementRef } from '@angular/
 export class DateDirective {
 
   @Input()
-  private date: Date;
+  private date: string;
 
   private paragraph;
 
@@ -18,7 +18,7 @@ export class DateDirective {
 
   @HostListener('mouseenter')
   onmouseenter(eventDate: Event) {
-      this.paragraph.innerHTML = this.date.toLocaleDateString();
+      this.paragraph.innerHTML = this.date;
       this.renderer.appendChild(this.el.nativeElement, this.paragraph);
   }
 

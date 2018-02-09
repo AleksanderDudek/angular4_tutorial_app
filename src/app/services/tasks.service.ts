@@ -2,43 +2,45 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Task } from '../models/task';
+import { HttpService } from './http.service';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 @Injectable()
 export class TasksService {
-  tasksList: Array<Task> = [];
-  tasksDone: Array<Task> = [];
 
-  private tasksListObs = new BehaviorSubject<Array<Task>>(this.tasksList);
-  private tasksDoneObs = new BehaviorSubject<Array<Task>>(this.tasksDone);
+  private tasksListObs = new BehaviorSubject<Array<Task>>([]);
 
-  constructor() {
-    this.tasksList = [
-      {name: 'Sprzatanie kuwety',
-       created: new Date },
-       {name: 'Bla kuwety',
-       created: new Date },
-       {name: 'Angular kuwety',
-       created: new Date }];
-    this.tasksListObs.next(this.tasksList);
+  constructor(private httpService: HttpService) {
+    // const tasksList = [
+    //   ];
 
+    // this.tasksListObs.next(tasksList);
+    this.httpService.getTasks().subscribe( list => {
+      this.tasksListObs.next(list);
+    });
   }
 
   add(task: Task) {
-    this.tasksList.push(task);
-    this.tasksListObs.next(this.tasksList);
+    const list = this.tasksListObs.getValue();
+    list.push(task);
+
+    this.tasksListObs.next(list);
   }
 
   remove(task: Task) {
-    this.tasksList = this.tasksList.filter( e => e !==task);
-    this.tasksListObs.next(this.tasksList);
+    const list = this.tasksListObs.getValue().filter(t => t !== task);
+    this.tasksListObs.next(list);
 
   }
 
   done(task: Task) {
-    this.tasksDone.push(task);
-    this.tasksList = this.tasksList.filter( e => e !==task);
-    this.tasksListObs.next(this.tasksList);
-    this.tasksDoneObs.next(this.tasksDone);
+    task.end = new Date().toLocaleString();
+    task.isDone = true;
+    // this.tasksDone.push(task);
+    // this.tasksList = this.tasksList.filter( e => e !==task);
+     const list = this.tasksListObs.getValue();
+     this.tasksListObs.next(list);
+    // this.tasksDoneObs.next(this.tasksDone);
 
   }
 
@@ -46,7 +48,7 @@ export class TasksService {
     return this.tasksListObs.asObservable();
   }
 
-  getTasksDoneObs(): Observable<Array<Task>> {
-    return this.tasksDoneObs.asObservable();
+  saveTasksInDb() {
+    this.httpService.saveTasks(this.tasksListObs.getValue());
   }
 }

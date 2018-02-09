@@ -13,8 +13,8 @@ export class TodoTasdonekComponent implements OnInit {
   tasksDone: Array<Task> = [];
 
   constructor(private tasksTaskService: TasksService) {
-    this.tasksTaskService.getTasksDoneObs().subscribe(tasks => {
-      this.tasksDone = tasks;
+    this.tasksTaskService.getTasksListObs().subscribe(tasks => {
+      this.tasksDone = tasks.filter(t => t.isDone === true);
     });
    }
 
