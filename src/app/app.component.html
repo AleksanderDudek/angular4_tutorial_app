@@ -1,17 +1,27 @@
-<div>
-  <div class="container">
-    <app-add-task></app-add-task>
-  </div>
-  <div class="container">
-    <div>
+<ul class="nav nav-pills justify-content-center">
+<li class="nav-item">
+  <a class="nav-link" routerLink="todoTask" routerLinkActive="active">
+    Zadania
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" routerLink="doneTask" routerLinkActive="active">
+    Zrobione
+  </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" *ngIf="!authService.user" routerLink="login" routerLinkActive="active">
+      Zaloguj
+    </a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" *ngIf="authService.user" (click)="logout()">
+        Wyloguj
+      </a>
+    </li>
+</ul>
+<router-outlet></router-outlet>
 
-      <app-todo-task></app-todo-task>
-    </div>
-    <div>
-     <app-todo-tasdonek></app-todo-tasdonek>
-    </div>
 
-  </div>
-  <button (click)="save()">ZAPISZ </button>
 
-</div>
+

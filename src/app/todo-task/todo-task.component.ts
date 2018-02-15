@@ -37,4 +37,8 @@ tasksList: Array<Task> = [];
   getColor(): string {
       return this.tasksList.length >= 5 ? 'red' : 'green';
   }
+
+  save() {
+    this.tasksTaskService.saveTasksInDb();
+  }
 }

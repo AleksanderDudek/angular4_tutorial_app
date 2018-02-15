@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from './services/tasks.service';
+import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,13 @@ import { TasksService } from './services/tasks.service';
 export class AppComponent  {
   title = 'app';
 
-  constructor(private tasksService: TasksService) {
+  constructor(public authService: AuthService, private router: Router) {
 
   }
 
-  save() {
-    this.tasksService.saveTasksInDb();
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }
